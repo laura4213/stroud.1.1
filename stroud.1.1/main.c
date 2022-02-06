@@ -3,6 +3,28 @@
  * Date: 1/24/2022
  *
  * References:
+ *	Perror: 
+	https://man7.org/linux/man-pages/man3/perror.3.html
+
+	Getopt:
+	https://www.tutorialspoint.com/getopt-function-in-c-to-parse-command-line-arguments
+	https://stackoverflow.com/questions/19604413/getopt-optional-arguments
+
+
+	How to do ssh key with git:
+	https://linuxkamarada.com/en/2019/07/14/using-git-with-ssh-keys/#.Ye72durMI2w
+
+	Makefile:
+	https://www.cs.colby.edu/maxwell/courses/tutorials/maketutor/
+
+	Read each character
+	https://www.codevscolor.com/c-program-read-file-contents-character
+	https://stackoverflow.com/questions/38621938/using-fgetc-for-reading-into-an-array-in-c
+
+
+	Push to github
+	https://www.datacamp.com/community/tutorials/git-push-pull
+
  */
 #include <stdio.h>
 #include <stdlib.h>
@@ -20,16 +42,22 @@ int main(int argc, char *argv[]){
         FILE *file;
         char *filename;
 	int j;
+
+	//All for reading the characters/ putting into mybuf
+        int n = 0;
+        char string[200];
+        char *delim = " \n";
+        char *word;
+        char line[200];
+        int length;
+        int y;
 	char ch;
 
-	//command line arguments
+	//command line argument
 	int opt;
 
 	while((opt = getopt(argc, argv, ":hp:c:s:i:f:")) != -1){
 		switch(opt){
-printf("%d nprocs\n", nprocs);
-                                printf("%d sleeptime\n", sleeptime);
-                                printf("%d nchars\n", nchars);
 			case 'h':
 				printf("./chain [-h] [-p nprocs] [-s sleeptime] [-i niters] < textfile\n\n");
 				printf("-p nprocs: number of processes\n");
@@ -56,7 +84,7 @@ printf("%d nprocs\n", nprocs);
 				break;
 			default:
 				printf("Usage: ./chain [-h] [-p nprocs] [-c nchars] [-s sleeptime] [-i niters] < textfile\n");
-				perror("Error in switch: ");
+				perror("Chain: Error in switch: ");
 				break;
 			
 		}
@@ -76,30 +104,22 @@ printf("%d nprocs\n", nprocs);
 		wait(NULL);
         	//fprintf(stderr, "i:%d process ID:%ld parent ID:%ld Child ID:%ld\n", i, (long)getpid(), (long)getppid(), (long)childpid);
 
-//		fprintf(stderr, "i:%d process ", i);
-//		fprintf(stderr, "process ID:%ld ", (long)getpid());
-//		fprintf(stderr, "parent ID:%ld \n ", (long)getppid());
+		fprintf(stderr, "i:%d process ", i);
+		fprintf(stderr, "process ID:%ld ", (long)getpid());
+		fprintf(stderr, "parent ID:%ld \n ", (long)getppid());
 		//fprintf(stderr, "child ID:%ld \n", (long)childpid);
-	} //END OF FOR LOOP
+	 //END OF FOR LOOP
 
 	
-	//open file
-        file = fopen(filename, "r");
-        if(file == NULL){
+		//open file
+        	file = fopen(filename, "r");
+        	if(file == NULL){
                 perror("Error opening file: ");
-        }else{
-                printf("opened file");
-        }
-	
-	//initalize array
-	char *mybuf = malloc(sizeof *mybuf *  nchars);
-	int n = 0;
-	char string[200];
-	char *delim = " \n";
-	char *word;
-	char line[200];
-	int length;
-	int y;
+        	}
+		//initalize array
+		char *mybuf = malloc(sizeof *mybuf *  nchars);
+		
+		/* For splitting up the file I first seperated into words then into each character. I referenced one of my old projects from 4280 to help with this part */
 		while(fgets(string, sizeof string, file)){ //loop through file
 			if(strstr(string, line)){
 				//do nothing
@@ -116,16 +136,13 @@ printf("%d nprocs\n", nprocs);
 		}
 		mybuf[n] = '\0';
 
+		printf("%ld: %s \n\n", (long)getpid(), mybuf);
+
+		
+
 		fclose(file);
-
-		int x;
-		//print array
-		for(x = 0; x < n; x++){
-			printf("%c \n", mybuf[x]);
-		}
-
 		free(mybuf);//free memory
-
+	}///////
         return 0;
 }
 

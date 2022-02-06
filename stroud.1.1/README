@@ -1,0 +1,16 @@
+To run my program:
+	./chain [-h] [-p nprocs] [-c nchars] [-s sleeptime] [-i niters] [-f textfile]
+
+Problems:
+
+	1. My first issue is with the command line argument with the textfile.I could not get the < textfile to work with all of the optinal arguments. When I tried pulling the argv for the textfile it never seemed to find the name of the file. I switched it to how the other arguments are read in and that fixed the issue for me.
+
+	2. Another issue I ran into was when only putting one argument in I would get a segmentation fault. However this stopped on its own the more I programmed. I'm not sure what fixed it.
+
+	3. I did perror and it works, but I don't think it is exactly how you wanted it output.
+
+	4. I also did not push to github after every task becuase I did not read that in time so steps are still pushed just not every task. 
+
+GitHub Link:
+
+	

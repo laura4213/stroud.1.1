@@ -1,0 +1,15 @@
+1.) When I do a short number of processes like 1 or 2 the parent’s ID is always a large number, but starting 4 and up it eventually becomes 1. After running it sometimes after the parent being 1 the child ID would be 0 and the program would end. I also noticed that running 20+ processes results in this happening multiple times throughout the run time.
+
+2.)(1) 1532790 ---> (2) 1532791 ---> (3) 1532792 ---> (4) 1532793
+
+3.) The higher the process the more times the child gets adopted by init. It seems to happen more frequently in the beginning of the program and the end.
+
+4.) Adding in the sleep function made a lot more children get adopted by init. It also changed the last child’s ID to -1 when it has normally been 0 for all the other runs.
+
+5.) Running it causes the same process IDs to run but at different times with each iteration. This is also the same for parent and child ID. When I put a long sleep time it did not seem to finish running sometimes. Adding in the loop and sleep time has caused no children to be adopted by init each time I ran the program
+
+6.) The wait function made the same process, parent and child run for the first few runs then changed to another one and would run that one for a little before switching again. It may have let the program get to 100 nprocs however after a certain amount of runs every time I ran the program it would seem to stop or slow down a lot. I don't think it can get to 100 processes. (This could also be an issue with my computer it does run extremely slow)
+
+7.) Separating out the fprintf did not seem to have much difference on the program. I did notice that some output would take a little to display each line while at certain parts of the program it would output 2-3 lines extremely fast.
+
+8.) The process ID starts at a higher number then increments down. I notice that it starts with the highest process ID from the first fprints before it goes in and reads characters.
